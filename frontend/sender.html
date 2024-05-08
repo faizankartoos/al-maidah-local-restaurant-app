@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" integrity="sha512-d0olNN35C6VLiulAobxYHZiXJmq+vl+BGIgAxQtD5+kqudro/xNMvv2yIHAciGHpExsIbKX3iLg+0B6d0k4+ZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" integrity="sha512-pZlKGs7nEqF4zoG0egeK167l6yovsuL8ap30d07kA5AJUq+WysFlQ02DLXAmN3n0+H3JVz5ni8SJZnrOaYXWBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <style>
+
+    .container-fluid{
+        height:100vh;
+        overflow-y: hidden;
+    }
+    .menu-available{
+        height: 100%;
+        overflow-y: scroll;
+    }
+    #cart{
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+
+    .item-price{
+        font-size: 15px;
+    }
+    .card{
+        height: inherit;
+    }
+    .card .items{
+        height: inherit;
+        overflow-y: scroll;
+    }
+    .cart-header{
+        background: rgb(145,157,217);
+        background: linear-gradient(90deg, rgba(145,157,217,0.7049020291710435) 3%, rgba(80,232,160,0.6908964269301471) 84%);
+        border-radius: 10px;
+    }
+    .order-in-cart{
+        background: rgb(15,15,15);
+background: linear-gradient(90deg, rgba(15,15,15,0.7049020291710435) 19%, rgba(40,3,62,0.6908964269301471) 100%);
+    }
+    .menu-available .card p{
+        font-size: 25px;
+    }
+
+    .order-type .input-group-text, .form-select{
+        border-radius: 0px;
+    }
+   </style>
+
+</head>
+<body>
+
+    <div class="container-fluid p-4 row" >
+        
+        <div class="menu-available col-8 border-end">
+            <h3>Menu</h3>
+            <div class="row mb-4" style="height: 400px;">
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-1">
+                        <p>Burgers</p>
+                    </div>
+                    <div id="burgers" class="items"></div>
+                </div>
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Boneless</p>
+                    </div>
+                    <div id="boneless" class="items"></div>
+                </div>
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>With bone</p>
+                    </div>
+                    <div id="withbone" class="items"></div>
+                </div>
+
+                
+
+               
+            </div>
+
+
+            <div class="row mb-4" style="height: 400px;">
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Wraps</p>
+                    </div>
+                    <div id="wraps" class="items"></div>
+                </div>
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Cheeza</p>
+                    </div>
+                    <div id="cheeza" class="items"></div>
+                </div>
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>combos</p>
+                    </div>
+                    <div id="combos" class="items"></div>
+                </div>
+
+                
+            </div>
+
+            <div class="row mb-4" style="height: 400px;">
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Fries</p>
+                    </div>
+                    <div id="fries" class="items"></div>
+                </div>
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Mojitos</p>
+                    </div>
+                    <div id="mojitos" class="items"></div>
+                </div>
+
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Shakes</p>
+                    </div>
+                    <div id="shakes" class="items"></div>
+                </div>
+
+                
+                
+            </div>
+            
+            <div class="row mb-4" style="height: 400px;">
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Coffee</p>
+                    </div>
+                    <div id="coffee" class="items"></div>
+                </div>
+                <div class="col-4 card " id="">
+                    <div class="d-flex justify-content-center p-2">
+                        <p>Extras</p>
+                    </div>
+                    <div id="extras" class="items"></div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <!-- <div class="row" id="root"></div> -->   
+            
+
+
+        </div>
+        <div class="order-in-cart col-4 mb-2 p-3" id="cart">
+            <div class="d-flex justify-content-between align-items-center mb-2 cart-header px-4 py-2">
+                <h3 class="mb-0">Items in cart</h3>
+                
+                <button class="btn btn-primary" onclick="placeOrder()">Place order</button>
+                <div id="total-price" class="p-3 border-rounded" style="background: #0800ff1f; border-radius:15px">
+                    <span class="me-2 fw-bold">Total price:</span>
+                    <span id="cart-total-price">0</span>
+                </div>
+            </div>
+
+         
+
+            <div class="d-flex order-type mb-2">
+
+                <span class="input-group-text">Order Type</span>
+                <select class="form-select" id="order-type-option">
+                    <option value="DINE_IN" selected>Dine In</option>
+                    <option value="PACK">Pack</option>
+                    <option value="DELIVERY">Delivery</option>
+                </select>
+            </div>
+        
+  
+            <div id="items"></div>
+
+
+        </div>
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<script>
+    URL = 'http://127.0.0.1:8004'
+
+    cart = []
+    DATA = null
+    
+    //DATA = [
+     //   {id:1,name:'burger-top', price:100, group:'burgers'},
+       // {id:2,name:'burger-down', price:200, group:'burgers'},
+        //{id:3,name:'wrap-top', price:300, group:'burgers'},
+        //{id:4,name:'wrap-down', price:400, group:'burgers'}
+        //]
+        
+    
+        
+        
+
+    function itemCard(id, itemName, itemPrice){
+        return $('<div>',{class:'d-flex border mb-2 p-1 menu-card justify-content-between'}).append([
+            $('<div>',{class:"d-flex flex-column"}).append([
+                $('<div>',{class:"me-3 item-name", text:itemName}),
+                $('<div>',{class:'text-muted item-price d-flex align-items-center'}).append([
+                    $('<span>',{class:'me-1', text: 'Price'}),
+                    $('<i>', {class:'fa-solid fa-arrow-right me-1'}),
+                    $('<span>',{class:'badge bg-success', text: itemPrice})
+                ])
+            ]),
+            $('<div>',{class:'d-flex'}).append(
+                $('<button>',{class:'btn btn-primary', onclick:`addToCart(${id})`}).append($('<i>',{class:'fa-solid fa-plus'}))    
+            )
+        ]).prop('outerHTML')
+    }
+
+
+    function itemCardCart(id, quantity, name, price){
+        return $('<div>',{class:'d-flex border mb-2 p-1 menu-card justify-content-between bg-light', id:'cart' + id}).append([
+            $('<div>',{class:"d-flex flex-column"}).append([
+                $('<div>',{class:"me-3 item-name", text:name}),
+                $('<div>',{class:'text-muted item-quantity'}).append([
+                    $('<span>',{class:'me-1', text: 'Quantity'}),
+                    $('<i>', {class:'fa-solid fa-arrow-right me-1'}),
+                    $('<span>',{class:'badge bg-success me-1', text: quantity}),
+                        $('<span>',{class:'badge bg-secondary', text: `Price: ${price}`})
+                ])
+            ]),
+            $('<div>',{class:'d-flex'}).append(
+                $('<button>',{class:'btn btn-primary', onclick:`removeFromCart(${id})`}).append($('<i>',{class:'fa-solid fa-minus'}))    
+            )
+        ]).prop('outerHTML')
+    }
+
+    function refreshCart(){
+        $('#cart>#items').empty()
+        for(let item of cart){
+            card = itemCardCart(item.id, item.quantity, item.name, item.price)
+            $('#cart>#items').append(card)
+        }
+    }
+
+
+
+   
+
+    function removeFromCart(id){
+        newQuantity = null
+        cart = cart.map((item,index) => {
+            if(item.id == id) {
+                if (item.quantity > 1){
+                 item.quantity--
+                 newQuantity = item.quantity
+                 return item
+                }
+            }else{
+                return item
+            }
+        }).filter((item) => item !== undefined);
+        refreshCart()
+        updateTotalPrice()
+        
+      
+    }
+
+    
+
+
+    function updateTotalPrice(){
+        total = null
+        console.log(cart)
+        for (let i=0; i<cart.length;i++){
+            total = total+parseInt(cart[i].price*parseInt(cart[i].quantity))
+        }
+       
+        $('#cart-total-price').text(total)
+    } 
+
+    function addToCart(id){
+        update = false
+        cart = cart.map((item,index) => {
+            if(item.id == id){
+                update = true
+                item.quantity = item.quantity + 1
+                return item
+            }
+            return item
+        })
+        itemName = DATA.filter(x => x.id == id)
+        if (update == false)cart.push({id:id,quantity:1,name:itemName[0].name, price:itemName[0].price})
+        updateTotalPrice()
+        refreshCart()
+    }
+    
+    
+    
+    function renderMenu(){
+        $.each(DATA,function(index,value){ 
+            card = itemCard(value.id, value.name, value.price)
+            $('#' + value.item_group).append(card)
+        });
+    }
+    
+    
+
+
+
+    function placeOrder(){
+        
+        $.ajax({
+            url: `${URL}/add-order`,
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({
+                data: cart,
+                order_type: $('#order-type-option').val()
+            }),
+            dataType: 'json',
+            
+            success: function (data) {
+                cart = []
+                refreshCart()
+            },
+            error: function (err) {
+                console.log('error',err)
+            }
+        });
+    }
+
+    
+    function get_menu(){
+        data = null
+        $.ajax({
+            url: `${URL}/get-menu`,
+            type: 'GET',
+            success: function (data) {
+                window.DATA = data
+                renderMenu(data)
+            },
+            error: function (err) {
+                return ''
+            }
+        });
+        return data
+    }
+
+    $(document).ready(function() {
+        get_menu()
+    });
+    
+</script>
+
+
+
+</html>

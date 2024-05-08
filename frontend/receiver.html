@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" integrity="sha512-d0olNN35C6VLiulAobxYHZiXJmq+vl+BGIgAxQtD5+kqudro/xNMvv2yIHAciGHpExsIbKX3iLg+0B6d0k4+ZA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" integrity="sha512-pZlKGs7nEqF4zoG0egeK167l6yovsuL8ap30d07kA5AJUq+WysFlQ02DLXAmN3n0+H3JVz5ni8SJZnrOaYXWBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <title>Document</title>
+
+    <style>
+        .container-fluid{
+            background-image: url('images/almaidah.jpg');
+            background-size:     cover;                      /* <------ */
+            background-repeat:   no-repeat;
+            background-position: center center;
+            height: 100vh;
+           
+        }
+
+        .countdown-container {
+            width: 300px;
+            text-align: center;
+            margin-bottom: 13px !important;
+          }
+          
+          .progress-bar {
+            width: 100%;
+            height: 30.6px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+          }
+          
+          .progress {
+            width: 0;
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 10px;
+          }
+          
+          .countdown {
+            font-size: 24px;
+          }
+          
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid  px-0">
+
+      
+        <div class="d-flex">
+            <div class="item-ids w-25" id="item-ids">
+                <div class="heading py-3 text-white fw-bold fs-3 px-3" style="background: #661c1b; border-right: 3px solid grey;">Order id</div>
+                <div class="content text-white" id="content">
+
+                </div>
+            </div>
+            <div class="item-status w-50"id="item-status">
+                <div class="heading py-3 text-white fw-bold fs-3 px-3" style="background: #661c1b; border-right: 3px solid grey;">Status</div>
+                <div class="content text-white d-flex flex-column" id="content">
+
+                </div>
+            </div>
+            <div class="item-time w-25" id="item-time">
+                <div class="heading py-3 text-white fw-bold fs-3 px-3" style="background: #661c1b;">Time remaining</div>
+                <div class="content text-white" id="content" style="padding-top: 5px;">
+
+                </div>
+            </div>
+            <div></div>
+        </div>
+
+
+    </div>
+
+
+      
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+<script>
+    URL = 'http://127.0.0.1:8004'
+
+
+    function startCountdown(targetDate, durationInSeconds, display, progressId) {
+        const endTime = targetDate + durationInSeconds * 1000;
+        
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+            
+            if (distance < 0) {
+            clearInterval(countdown);
+            progItem = document.getElementById(progressId);
+            progItem.style.width = '0%';
+            progItem.innerText = 'Countdown completed!';
+            return;
+          }
+      
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          const totalTimeInSeconds = Math.floor(distance / 1000);
+          const totalTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+          const progress = ((endTime - now) / (durationInSeconds * 1000)) * 100;
+      
+          progItem2 = document.getElementById(progressId);
+          progItem2.style.width = progress + '%';
+
+          progItem2.innerText = totalTime;
+        }, 1000);
+      }
+      
+      
+      
+
+
+    function getTimer(id){
+        return $('<div>', {class:'countdown-container p-1 mb-2'}).append([
+            $('<div>',{class:'progress-bar'}).append(
+                $('<div>',{class:'progress d-flex justify-content-center align-items-center fs-4 text-dark', id:'progress' + id})    
+            ),
+            $('<div>',{class:'countdown', id:'countdown' + id})
+        ]).prop('outerHTML')
+    }
+
+
+  
+    
+
+    function getItemRow(data){
+        return $('<div>',{class:'fs-4 p-1 mb-2', text:'# '+data}).prop('outerHTML')
+    }
+
+    function getItemRowStatus(data){
+        let bgClass = 'bg-warning text-dark'
+        if (data.toLowerCase() === 'completed'){
+            bgClass = 'bg-success'
+        }else if(data.toLowerCase() === 'cancelled'){
+            bgClass = 'bg-danger text-dark'
+        }
+        return $('<div>',{class:'fs-4 p-1 mb-2'}).append(
+            $('<span>', {class:`badge ${bgClass}`, text: data})    
+        ).prop('outerHTML')
+    }
+
+ 
+
+    function humanizeDate(date) {
+        const tzCorrectedDatetime = new Date(date + "+00:00").toLocaleString('en-GB', { timeZone: 'Asia/Kolkata' });
+        const [tzCorrectedDate, tzCorrectedTime] = tzCorrectedDatetime.split(', ');
+        const [iDate, iMon, iYear] = tzCorrectedDate.split('/');
+        const [iHour, iMin, iSec] = tzCorrectedTime.trim().split(':');
+        const parsedDate = new Date(iYear, parseInt(iMon)-1, iDate, iHour, iMin, iSec);
+        
+        const now = new Date();
+        const delta = Math.round((now.getTime() - parsedDate.getTime()) / 1000);
+        
+    
+        const minute = 60,
+            hour = minute * 60,
+            day = hour * 24,
+            week = day * 7;
+    
+        let fuzzy = null;
+    
+        if (delta < 30) {
+            fuzzy = 'just now';
+        } else if (delta < minute) {
+            fuzzy = delta + ' seconds ago';
+        } else if (delta < 2 * minute) {
+            fuzzy = 'a minute ago'
+        } else if (delta < hour) {
+            fuzzy = Math.floor(delta / minute) + ' minutes ago';
+        } else if (Math.floor(delta / hour) == 1) {
+            fuzzy = '1 hour ago'
+        } else if (delta < day) {
+            fuzzy = Math.floor(delta / hour) + ' hours ago';
+        } else if (delta < day * 2) {
+            fuzzy = 'yesterday at ' + tzCorrectedTime;
+        } else if(parsedDate.getYear() == now.getYear()) {
+            const month = parsedDate.toLocaleString('default', { month: 'short' });
+            fuzzy = month + ' ' + parsedDate.getDate() + ' at ' + tzCorrectedTime;
+        } else {
+            fuzzy = date.split('.')[0];
+        }
+    
+        return fuzzy;
+    }
+
+    function showOrdersPlacedCard(order_type, order_id, order_status, order_duration){
+        return $('<div>', {class:'card text-center col-sm-12 col-md-6 col-lg-4 mb-2', style:'height:fit-content'}).append([
+            $('<div>', {class:'card-header', text: order_type}),
+            $('<div>', {class:'card-body'}).append([
+                $('<h5>',{class:'card-title', text: 'Order id: ' + order_id}),
+                $('<p>',{class:'card-text', text: 'Status: ' + order_status})
+            ]),
+            $('<div>',{class:'card-footer text-muted', text:order_duration})
+        ]).prop('outerHTML')
+    }
+
+    function getOrders(){
+        $.ajax({
+            url: `${URL}/get-order-history`,
+            type: 'GET',
+            success: function (data) {
+                $('#item-ids>#content').empty()
+                $('#item-status>#content').empty()
+                $('#item-time>#content').empty()
+
+                data.map((item) => {
+                    console.log(item)
+                    id = getItemRow(item.id)
+                    status = getItemRowStatus(item.status)
+                    timerContainer = getTimer(item.id)
+                   
+                    $('#item-ids>#content').append(id)
+                    $('#item-status>#content').append(status)
+                    $('#item-time>#content').append(timerContainer)
+
+                    const pastDate = new Date(item.created_at + "+00:00").getTime();// Example: January 1, 2023, at noon
+                    const duration = 30 * 60; // 30 minutes in seconds
+                    const countdownDisplay = document.getElementById('countdown'+item.id);
+                    if (item.status === 'PROCESSING'){
+                        startCountdown(pastDate, duration, countdownDisplay, 'progress'+item.id);
+                    } 
+                })
+            },
+            error: function (err) {
+                return ''
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        setInterval(getOrders, 5000)
+        //getOrders()
+    })
+
+</script>
+
+
+</html>
